@@ -1,7 +1,7 @@
 package facades;
 
 
-import DTO.PersonDTO;
+import DTO.KayakDTO;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import java.io.IOException;
@@ -52,18 +52,18 @@ public class SwapiFacade {
         return jsonStr;
       }
 
-    public List<PersonDTO> getAll() throws InterruptedException, ExecutionException{
-        List<PersonDTO> persons = new ArrayList<>();
+    public List<KayakDTO> getAll() throws InterruptedException, ExecutionException{
+        List<KayakDTO> persons = new ArrayList<>();
         
-        Queue<Future<PersonDTO>> queue = new ArrayBlockingQueue(10);
+        Queue<Future<KayakDTO>> queue = new ArrayBlockingQueue(10);
        
        // List<Future<String>> futures = new ArrayList();
         
         for (int i = 1; i <= 10; i++) {
             final int count = i;
-            Future<PersonDTO> future = executor.submit(() -> {
+            Future<KayakDTO> future = executor.submit(() -> {
                 
-                PersonDTO person = GSON.fromJson(getSwappiData(count), PersonDTO.class);
+                KayakDTO person = GSON.fromJson(getSwappiData(count), KayakDTO.class);
                 return person;
             });
 
@@ -72,7 +72,7 @@ public class SwapiFacade {
             
         
         while (!queue.isEmpty()) {
-            Future<PersonDTO> person = queue.poll();
+            Future<KayakDTO> person = queue.poll();
             if (person.isDone()) {
                 persons.add(person.get());
             } else {
@@ -87,9 +87,9 @@ public class SwapiFacade {
         
         SwapiFacade sf = SwapiFacade.getSwappiFacade();
         
-        List<PersonDTO> persons = sf.getAll();
+        List<KayakDTO> persons = sf.getAll();
         
-        for (PersonDTO person : persons) {
+        for (KayakDTO person : persons) {
             System.out.println(person);
         }
         

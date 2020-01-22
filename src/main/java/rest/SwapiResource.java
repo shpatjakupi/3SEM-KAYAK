@@ -1,6 +1,6 @@
 package rest;
 
-import DTO.PersonDTO;
+import DTO.KayakDTO;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import errorhandling.NotFoundException;
@@ -35,7 +35,7 @@ public class SwapiResource {
     @Produces(MediaType.APPLICATION_JSON)
     public String getPersons() throws NotFoundException {
         try {
-            List<PersonDTO> persons = SF.getAll();
+            List<KayakDTO> persons = SF.getAll();
             return GSON.toJson(persons);
         } catch (InterruptedException | ExecutionException ex) {
 

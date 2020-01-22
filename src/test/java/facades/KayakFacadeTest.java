@@ -1,5 +1,6 @@
 package facades;
 
+import DTO.KayakDTO;
 import utils.EMF_Creator;
 import entities.Kayak;
 import javax.persistence.EntityManager;
@@ -17,12 +18,12 @@ import utils.EMF_Creator.Strategy;
 
 //Uncomment the line below, to temporarily disable this test
 @Disabled
-public class FacadeExampleTest {
+public class KayakFacadeTest {
 
     private static EntityManagerFactory emf;
-    private static FacadeExample facade;
-
-    public FacadeExampleTest() {
+    private static KayakFacade facade;
+    Kayak
+    public KayakFacadeTest() {
     }
 
     //@BeforeAll
@@ -33,7 +34,7 @@ public class FacadeExampleTest {
                 "dev",
                 "ax2",
                 EMF_Creator.Strategy.CREATE);
-        facade = FacadeExample.getFacadeExample(emf);
+        facade = KayakFacade.getFacadeExample(emf);
     }
 
     /*   **** HINT **** 
@@ -45,7 +46,7 @@ public class FacadeExampleTest {
     @BeforeAll
     public static void setUpClassV2() {
        emf = EMF_Creator.createEntityManagerFactory(DbSelector.TEST,Strategy.DROP_AND_CREATE);
-       facade = FacadeExample.getFacadeExample(emf);
+       facade = KayakFacade.getFacadeExample(emf);
     }
 
     @AfterAll
@@ -61,8 +62,8 @@ public class FacadeExampleTest {
         try {
             em.getTransaction().begin();
             em.createNamedQuery("RenameMe.deleteAllRows").executeUpdate();
-            em.persist(new Kayak("Some txt", "More text"));
-            em.persist(new Kayak("aaa", "bbb"));
+            em.persist(new KayakDTO(em));
+            em.persist(new KayakDTO("aaa", "bbb"));
 
             em.getTransaction().commit();
         } finally {

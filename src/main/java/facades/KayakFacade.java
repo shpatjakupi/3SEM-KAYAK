@@ -10,13 +10,13 @@ import javax.persistence.Persistence;
  *
  * Rename Class to a relevant name Add add relevant facade methods
  */
-public class FacadeExample {
+public class KayakFacade {
 
-    private static FacadeExample instance;
+    private static KayakFacade instance;
     private static EntityManagerFactory emf;
     
     //Private Constructor to ensure Singleton
-    private FacadeExample() {}
+    private KayakFacade() {}
     
     
     /**
@@ -24,10 +24,10 @@ public class FacadeExample {
      * @param _emf
      * @return an instance of this facade class.
      */
-    public static FacadeExample getFacadeExample(EntityManagerFactory _emf) {
+    public static KayakFacade getFacadeExample(EntityManagerFactory _emf) {
         if (instance == null) {
             emf = _emf;
-            instance = new FacadeExample();
+            instance = new KayakFacade();
         }
         return instance;
     }
@@ -36,16 +36,17 @@ public class FacadeExample {
         return emf.createEntityManager();
     }
     
-    //TODO Remove/Change this before use
-    public long getRenameMeCount(){
+    private static Kayak getKayak(String name){
         EntityManager em = emf.createEntityManager();
         try{
-            long renameMeCount = (long)em.createQuery("SELECT COUNT(r) FROM RenameMe r").getSingleResult();
-            return renameMeCount;
-        }finally{  
+            if (name.isEmpty() || name == null) return null;
+            Kayak kayak = em.createNamedQuery("Kayak.getByName", Kayak.class).setParameter("name", name).getSingleResult();
+            return kayak;
+        }catch(Exception e){
+            return null;
+        }finally{
             em.close();
         }
-        
     }
 
 }
