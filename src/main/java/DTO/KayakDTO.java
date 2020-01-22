@@ -19,6 +19,38 @@ public class KayakDTO implements Serializable /* tjek */ {
     private List<BookingDateDTO> bookingdates;
     private List<ImageDTO> images;
 
+    public String getName() {
+        return name;
+    }
+
+    public String getModel() {
+        return model;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public int getPersonsAllowed() {
+        return personsAllowed;
+    }
+
+    public List<BookingDateDTO> getBookingdates() {
+        return bookingdates;
+    }
+
+    public List<ImageDTO> getImages() {
+        return images;
+    }
+
     public KayakDTO(Kayak k) {
         this.name = k.getName();
         this.model = k.getModel();

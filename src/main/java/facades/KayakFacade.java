@@ -1,5 +1,7 @@
 package facades;
 
+import DTO.BookingDateDTO;
+import DTO.ImageDTO;
 import DTO.KayakDTO;
 import entities.BookingDate;
 import entities.Image;
@@ -10,6 +12,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -87,10 +90,10 @@ public class KayakFacade {
             
             for(Image i : kayak.getImage()){ //  
                 image = getImageById(i.getId());  
-                if(image == null){ // hvis director ikke findes så skal han ligges i databasen, 
+                if(image == null){ // hvis images ikke findes så skal images ligges i databasen, 
                     em.persist(i);
                 }else{ 
-                    images.add(image); // hvis han er i databasen så skal han tilknyttes en movie
+                    images.add(image); // hvis images er i databasen så skal images tilknyttes en movie
                 }
             }
             
@@ -115,6 +118,31 @@ public class KayakFacade {
         }
       
      }
+    
+    public ImageDTO addImage(Image i) {
+        EntityManager em = emf.createEntityManager();
+        try{        
+            em.getTransaction().begin();
+            em.persist(i);
+            em.getTransaction().commit();
+            return new ImageDTO(i);
+        }finally{
+            em.close();
+        }
+    }
+    
+  
+    public List<BookingDateDTO> getAllBookings() throws NotFoundException {
+        EntityManager em = emf.createEntityManager();
+        try {
+            TypedQuery<BookingDateDTO> tq = em.createNamedQuery("BookingDate.getAll", BookingDateDTO.class);
+            List<BookingDateDTO> dates = tq.getResultList();
+            if(dates.isEmpty()) throw new NotFoundException("No movies has been added to the database yet.");
+            return dates;
+        } finally {
+            em.close();
+        }
+    }
    
     }
     
