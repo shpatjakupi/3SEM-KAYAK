@@ -32,7 +32,7 @@ public class KayakFacade {
      * @param _emf
      * @return an instance of this facade class.
      */
-    public static KayakFacade getFacadeExample(EntityManagerFactory _emf) {
+    public static KayakFacade getKayakFacade(EntityManagerFactory _emf) {
         if (instance == null) {
             emf = _emf;
             instance = new KayakFacade();
@@ -131,6 +131,18 @@ public class KayakFacade {
         }
     }
     
+    public List<KayakDTO> getAllKayaks() throws NotFoundException {
+        EntityManager em = emf.createEntityManager();
+        try {
+            TypedQuery<KayakDTO> tq = em.createNamedQuery("BookingDate.getAll", KayakDTO.class);
+            List<KayakDTO> k = tq.getResultList();
+            if(k.isEmpty()) throw new NotFoundException("No kayaks found in the database");
+            return k;
+        } finally {
+            em.close();
+        }
+    }
+    
   
     public List<BookingDateDTO> getAllBookings() throws NotFoundException {
         EntityManager em = emf.createEntityManager();
@@ -140,6 +152,33 @@ public class KayakFacade {
             if(dates.isEmpty()) throw new NotFoundException("No movies has been added to the database yet.");
             return dates;
         } finally {
+            em.close();
+        }
+    }
+    
+    public List<KayakDTO> getKayakBySpace(int personsAllowed) throws NotFoundException {
+        EntityManager em = emf.createEntityManager();
+        try {
+            TypedQuery<KayakDTO> tq = em.createNamedQuery("Kayak.getByPersonAllowed", KayakDTO.class).setParameter("personsAllowed", personsAllowed);
+            List<KayakDTO> kayaks = tq.getResultList();
+            if(kayaks.isEmpty()) throw new NotFoundException("No kayaks with room for: " + personsAllowed + " exists in the database.");
+            return kayaks;
+        } finally {
+            em.close();
+        }
+    }
+    
+  
+    public KayakDTO deleteKayak(Long id) throws NotFoundException {
+        EntityManager em = emf.createEntityManager();
+        try{
+            Kayak kayak = em.find(Kayak.class, id);
+            if(kayak == null) throw new NotFoundException("a kayak with the id: " + id + " doesnt exist.");
+            em.getTransaction().begin();
+            em.remove(kayak);
+            em.getTransaction().commit();
+            return new KayakDTO(kayak);
+        }finally{
             em.close();
         }
     }
