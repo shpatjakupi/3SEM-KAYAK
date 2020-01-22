@@ -12,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 /**
@@ -25,9 +26,16 @@ public class Image implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
+    public Image(){}
+    public Image(String url, Kayak kayak) {
+        this.id = id;
+        this.url = url;
+        this.kayak = kayak;
+    }
     private String url;
     
-    @OneToMany(mappedBy = "image")
+    @ManyToOne
     private Kayak kayak;
 
     public String getUrl() {

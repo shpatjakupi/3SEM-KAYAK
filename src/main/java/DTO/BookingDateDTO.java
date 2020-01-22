@@ -6,6 +6,9 @@
 package DTO;
 
 import entities.BookingDate;
+import entities.User;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *

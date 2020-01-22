@@ -26,11 +26,36 @@ public class BookingDate implements Serializable {
     private Long id;
     private String bookingDate;
     
-    @OneToMany(mappedBy = "Bookingdate")
+    @ManyToOne
     private Kayak kayak;
     
     @ManyToOne
     private User user;
+
+    public BookingDate() {};
+
+    public BookingDate(String bookingDate, Kayak kayak, User user) {
+        this.id = id;
+        this.bookingDate = bookingDate;
+        this.kayak = kayak;
+        this.user = user;
+    }
+    
+    public Kayak getKayak() {
+        return kayak;
+    }
+
+    public void setKayak(Kayak kayak) {
+        this.kayak = kayak;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     public String getBookingDate() {
         return bookingDate;

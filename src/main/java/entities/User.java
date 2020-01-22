@@ -40,6 +40,14 @@ public class User implements Serializable {
   @OneToMany(mappedBy = "user")
   private List<BookingDate> bookingdate;
 
+    public List<BookingDate> getBookingdate() {
+        return bookingdate;
+    }
+
+    public void setBookingdate(List<BookingDate> bookingdate) {
+        this.bookingdate = bookingdate;
+    }
+
 
 // gensalt's log_rounds parameter determines the complexity
 // the work factor is 2**log_rounds, and the default is 10
@@ -77,6 +85,8 @@ public class User implements Serializable {
     this.userPass = hashed1;
    
   }
+  
+  
 
 
   public String getUserName() {

@@ -1,5 +1,6 @@
 package entities;
 
+import entities.BookingDate;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Entity;
@@ -35,20 +36,44 @@ public class Kayak implements Serializable {
     
     
     @OneToMany
-    private List<Image> image;
+    private List<Image> images;
     
     @OneToMany
     private List<BookingDate> bookingdates;
+
+    public Kayak(String name, String model, String description, int year, String color, int personsAllowed) {
+        this.id = id;
+        this.name = name;
+        this.model = model;
+        this.description = description;
+        this.year = year;
+        this.color = color;
+        this.personsAllowed = personsAllowed;
+        this.images = images;
+        this.bookingdates = bookingdates;
+    }
     
     
     public Kayak() { }
 
+    public void addBookingDate(BookingDate date)
+    {
+        bookingdates.add(date);
+    }
+    
+    public void addImages(Image image)
+    {
+        images.add(image);
+    }
+         
+            
+            
     public List<Image> getImage() {
-        return image;
+        return images;
     }
 
     public void setImage(List<Image> image) {
-        this.image = image;
+        this.images = image;
     }
 
     public List<BookingDate> getBookingdate() {
@@ -114,6 +139,11 @@ public class Kayak implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return "Kayak{" + "id=" + id + ", name=" + name + ", model=" + model + ", description=" + description + ", year=" + year + ", color=" + color + ", personsAllowed=" + personsAllowed + ", images=" + images + ", bookingdates=" + bookingdates + '}';
     }
     
    
