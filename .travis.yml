@@ -38,7 +38,7 @@ before_script:
 
   - sudo mysql -u root -e "CREATE User 'sj1234'@'localhost' IDENTIFIED BY 'sj1234'; GRANT ALL PRIVILEGES ON *.* TO 'sj1234'@'localhost' WITH GRANT OPTION;"
   # - sudo mysql -u root -e "CREATE DATABASE startcodev2-test;"
-  - sudo mysql -u dev -pax2 -e "CREATE DATABASE kayak_test;"
+  - sudo mysql -u sj1234 -psj1234 -e "CREATE DATABASE kayak_test;"
 
   - echo "Change  port to 3307, to mirror the local development setup"
   - sudo systemctl stop mysql

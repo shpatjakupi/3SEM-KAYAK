@@ -81,8 +81,8 @@ public class KayakFacade {
 
     public static void main(String[] args) {
         KayakFacade f = KayakFacade.getKayakFacade(EMF_Creator.createEntityManagerFactory(EMF_Creator.DbSelector.DEV, EMF_Creator.Strategy.CREATE));
-        Kayak k = new Kayak("blabla", "bro", "van damm", 1998, "grå", 1);
-        k.addImages(new Image("blablabla.dk"));
+        Kayak k = new Kayak("Kayak", "den gode", "van damm john", 1998, "sort", 2);
+        k.addImages(new Image("https://shop13286.hstatic.dk/upload_dir/shop/Winner-boerne-kajak-15g.w610.h610.fill.jpg"));
         System.out.println(k);
         try {
             KayakDTO kdto = f.addKayak(k);

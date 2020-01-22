@@ -32,9 +32,10 @@ public class UserFacade {
         EntityManager em = emf.createEntityManager();
         User user;
         try {
-            user = em.find(User.class, username);
+            user = (User)em.createQuery("SELECT u FROM User u WHERE u.userName = :username")
+                    .setParameter("username", username).getSingleResult();
             if (user == null || !user.verifyPassword(password)) {
-                throw new AuthenticationException("Invalid user name or password");
+                throw new AuthenticationException("Invalid username or password");
             }
         } finally {
             em.close();
