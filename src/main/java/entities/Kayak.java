@@ -2,7 +2,9 @@ package entities;
 
 import entities.BookingDate;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -35,11 +37,11 @@ public class Kayak implements Serializable {
     
     
     
-    @OneToMany
+    @OneToMany(cascade = CascadeType.PERSIST)
     private List<Image> images;
     
-    @OneToMany
-    private List<BookingDate> bookingdates;
+    @OneToMany(cascade = CascadeType.PERSIST)
+    private List<BookingDate> bookingdates; 
 
     public Kayak(String name, String model, String description, int year, String color, int personsAllowed) {
         this.id = id;
@@ -49,8 +51,8 @@ public class Kayak implements Serializable {
         this.year = year;
         this.color = color;
         this.personsAllowed = personsAllowed;
-        this.images = images;
-        this.bookingdates = bookingdates;
+        this.images = new ArrayList<>();
+        this.bookingdates = new ArrayList<>();
     }
     
     

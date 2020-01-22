@@ -28,7 +28,7 @@ public class BookingDate implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String bookingDate;
     
@@ -40,10 +40,9 @@ public class BookingDate implements Serializable {
 
     public BookingDate() {};
 
-    public BookingDate(String bookingDate, Kayak kayak, User user) {
+    public BookingDate(String bookingDate, User user) {
         this.id = id;
         this.bookingDate = bookingDate;
-        this.kayak = kayak;
         this.user = user;
     }
     

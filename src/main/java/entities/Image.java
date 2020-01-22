@@ -24,14 +24,12 @@ public class Image implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     public Image(){}
-    public Image(String url, Kayak kayak) {
-        this.id = id;
+    public Image(String url) {
         this.url = url;
-        this.kayak = kayak;
     }
     private String url;
     
@@ -76,7 +74,9 @@ public class Image implements Serializable {
 
     @Override
     public String toString() {
-        return "entities.Image[ id=" + id + " ]";
+        return "Image{" + "url=" + url + ", kayak=" + kayak + '}';
     }
+
+
     
 }

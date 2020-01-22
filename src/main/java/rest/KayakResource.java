@@ -58,8 +58,8 @@ public class KayakResource {
     @Path("bookings")
     public String getAllBookings() throws NotFoundException {
         return GSON.toJson(FACADE.getAllBookings());
-    }
-     
+    } 
+    
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("getbyspace/{number}")
