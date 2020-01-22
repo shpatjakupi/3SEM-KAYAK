@@ -1,6 +1,6 @@
 package facades;
 
-import entities.RenameMe;
+import entities.Kayak;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
