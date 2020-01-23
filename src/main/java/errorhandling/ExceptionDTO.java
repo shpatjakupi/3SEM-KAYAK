@@ -1,5 +1,8 @@
 package errorhandling;
-
+/**
+ *
+ * @author shpattt
+ */
 public class ExceptionDTO{
 
   public ExceptionDTO(int code, String description){

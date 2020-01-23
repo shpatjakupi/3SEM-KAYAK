@@ -13,7 +13,10 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
-
+/**
+ *
+ * @author shpattt
+ */
 @Entity
 @NamedQueries({
     @NamedQuery(name = "Kayak.getAll", query = "SELECT new DTO.KayakDTO(k) FROM Kayak k"),

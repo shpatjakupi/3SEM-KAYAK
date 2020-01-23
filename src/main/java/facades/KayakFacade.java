@@ -22,6 +22,10 @@ import utils.EMF_Creator;
  * Rename Class to a relevant name Add add relevant facade methods
  */
 public class KayakFacade {
+    /**
+ *
+ * @author shpattt
+ */
 
     private static KayakFacade instance;
     private static EntityManagerFactory emf;

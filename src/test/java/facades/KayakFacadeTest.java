@@ -18,7 +18,10 @@ import utils.EMF_Creator;
 import utils.EMF_Creator.DbSelector;
 import utils.EMF_Creator.Strategy;
 
-
+/**
+ *
+ * @author shpattt
+ */
 public class KayakFacadeTest {
 
     private static EntityManagerFactory emf;
