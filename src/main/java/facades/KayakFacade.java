@@ -81,8 +81,8 @@ public class KayakFacade {
 
     public static void main(String[] args) {
         KayakFacade f = KayakFacade.getKayakFacade(EMF_Creator.createEntityManagerFactory(EMF_Creator.DbSelector.DEV, EMF_Creator.Strategy.CREATE));
-        Kayak k = new Kayak("Kayak", "den gode", "van damm john", 1998, "sort", 2);
-        k.addImages(new Image("https://shop13286.hstatic.dk/upload_dir/shop/Winner-boerne-kajak-15g.w610.h610.fill.jpg"));
+        Kayak k = new Kayak("Den gamle tun", "VSP-20XMODEL", "sejl dig frem til sejr", 2003, "sort", 3);
+        k.addImages(new Image("http://www.kajakhero.dk/index_htm_files/18614@2x.jpg"));
         System.out.println(k);
         try {
             KayakDTO kdto = f.addKayak(k);
@@ -95,36 +95,9 @@ public class KayakFacade {
     public KayakDTO addKayak(Kayak kayak) throws NotFoundException {
         EntityManager em = emf.createEntityManager();
 
-        Image image;
-        BookingDate date;
-
-        List<Image> images = new ArrayList<>();
-        List<BookingDate> dates = new ArrayList<>();
-
         try {
             em.getTransaction().begin();
             em.persist(kayak);
-
-//            for (Image i : kayak.getImage()) { //  
-//                image = getImageById(i.getId());
-//                if (image == null) { // hvis images ikke findes så skal images ligges i databasen, 
-//                    em.persist(i);
-//                } else {
-//                    images.add(image); // hvis images er i databasen så skal images tilknyttes en movie
-//                }
-//            }
-//
-//            for (BookingDate d : kayak.getBookingdate()) {
-//                date = getBookingDateById(d.getId());
-//                if (date == null) {
-//                    em.persist(d);
-//                } else {
-//                    dates.add(date);
-//                }
-//            }
-//
-//            kayak.setBookingdate(dates);
-//            kayak.setImage(images);
 
             em.getTransaction().commit();
             return new KayakDTO(kayak);
